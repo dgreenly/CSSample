@@ -1,11 +1,11 @@
 exports.config = {
   framework: 'jasmine',
-   onPrepare: function() {
-    var jasmineReporters = require('path_of_installed_jasmine-reporters-plugin');
+   //onPrepare: function() {
+    //var jasmineReporters = require('path_of_installed_jasmine-reporters-plugin');
     //update proper path, in my case its ('/usr/local/lib/node_modules/jasmine-reporters')
-    jasmine.getEnv().addReporter(
-        new jasmineReporters.JUnitXmlReporter(null, true, true, '/test/e2e/JasmineReporter')
-    );},
+    //jasmine.getEnv().addReporter(
+    //    new jasmineReporters.JUnitXmlReporter(null, true, true, '/test/e2e/JasmineReporter')
+    //);},
   seleniumAddress: 'http://localhost:4444/wd/hub',
   specs: ['tracking-first-spec.js'],
   capabilities: {
