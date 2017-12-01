@@ -1,43 +1,19 @@
 exports.config = {
   framework: 'jasmine',
-
-   //onPrepare function is used for elements that every .js file that will 
-   //get run will need.  The Login functionality needs to be put in here
-   onPrepare: function() {
-      by.addLocator('findButtonByExactText',
-          function(buttonText, opt_parentElement, opt_rootSelector) {
-        // This function will be serialized as a string and will execute in the
-        // browser. The first argument is the text for the button. The second
-        // argument is the parent element, if any.
-        var using = opt_parentElement || document,
-            buttons = using.querySelectorAll('.btn'); //This works great
-
-        // Return an array of buttons with the text.
-        return Array.prototype.filter.call(buttons, function(button) {
-          return button.textContent === buttonText;
-        });
-      });
+   //onPrepare: function() {
     //var jasmineReporters = require('path_of_installed_jasmine-reporters-plugin');
     //update proper path, in my case its ('/usr/local/lib/node_modules/jasmine-reporters')
     //jasmine.getEnv().addReporter(
     //    new jasmineReporters.JUnitXmlReporter(null, true, true, '/test/e2e/JasmineReporter')
-    //);
-  },
-  seleniumAddress: 'http://localhost:4444/wd/hub',
-  //Specs are going to execute in alpha order.  Look at the Suites functionality in protractor.
-  //Also Look at this for login for all specs/suites.
-  //https://stackoverflow.com/questions/40642536/protractor-executing-login-scripts-prior-to-launching-my-test-specs
-  //specs: ['tracking-first-spec.js',
-  //       'tf-girona-spec.js'],
-  specs: ['tf-girona-spec.js'],
+    //);},
+  seleniumAddress: 'http://127.0.0.1:4444/wd/hub',
+  specs: ['tracking-first-spec.js'],
   capabilities: {
 	browserName: 'chrome',
 	chromeOptions: {
 	     args: [ "--headless", "--disable-gpu", "--window-size=800,600" ]
 	   }
   },
-
-
 
   //Options to be passed to Jasmine-node.
   jasmineNodeOpts: {
