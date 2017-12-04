@@ -27,15 +27,11 @@ exports.config = {
 
       //Run the login functionality here so that all the subsequest test scripts
       //do not need to do this everytime to get in.
-      browser.waitForAngularEnabled(false);
-      browser.get(env.baseUrl);
-
-      //element(by.model('todoList.todoText')).sendKeys('write first protractor test');
-
-      //expect(browser.getTitle()).toEqual('Login | Tracking First');
-      element(by.id('username')).sendKeys('dgreenepic@gmail.com');
-      element(by.id('password')).sendKeys('Tet50p@@l');
-      element(by.id('_submit')).click();
+      //browser.waitForAngularEnabled(false);
+      //browser.get(env.baseUrl);
+      //element(by.id('username')).sendKeys('dgreenepic@gmail.com');
+      //element(by.id('password')).sendKeys('xxxxxxxxxx');
+      //element(by.id('_submit')).click();
 
       
 
@@ -54,9 +50,9 @@ exports.config = {
   //specs: ['tf-girona-spec.js'],
   capabilities: {
 	browserName: 'chrome',
-	chromeOptions: {
-	     args: [ "--headless", "--disable-gpu", "--window-size=800,600" ]
-	   }
+	//chromeOptions: {
+	//     args: [ "--headless", "--disable-gpu", "--window-size=1100,1100" ]
+	//   }
   },
 
 
