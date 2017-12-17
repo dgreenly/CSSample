@@ -83,7 +83,34 @@ describe('TrackingFirst QA Create Pattern', function() {
 
     cells.get(1).click();
     cells.get(1).click();
-    //cells.get(1).sendKeys('BAM');
+    browser.driver.sleep(1000);
+
+    browser.actions().
+    mouseDown(cells.get(1)).
+    sendKeys("BAM").
+    mouseUp().
+    perform();
+
+    browser.actions().
+    mouseDown(cells.get(2)).
+    mouseUp().
+    perform();
+
+    //This drags the selection from the first cell in the classification table to the 3rd.
+    //This code WORKS
+    browser.actions().
+    mouseDown(cells.get(1)).
+    mouseMove(cells.get(3)).
+    mouseUp().
+    perform();
+
+   cells.get(1).click();
+
+    //browser.actions = new Actions(driver);
+    //browser.actions.moveToElement(cells.get(1));
+    //browser.actions.click();
+    //browser.actions.sendKeys("Some Name");
+   // browser.actions.build().perform();
 
     //expect(cells.get(0).getText()).toEqual("something");
     //expect(cells.get(1).getText()).toEqual("something");
