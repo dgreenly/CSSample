@@ -10,50 +10,81 @@ describe('TrackingFirst QA Create Pattern', function() {
 
   it('should create a custom pattern', function() {
 
-    //Just some test code, this page has 89 divs on it
+    //Just some test code, this page has divs on it depending on how many reports
     var divsOnPage = element.all(by.css('div'));
-    expect(divsOnPage.count()).toBe(89);
+    expect(divsOnPage.count()).toBe(93);
 
     //Verifying there is only one Campaigns Suite for Bosch Sandbox
-     var boschCampaigns = element.all(by.cssContainingText('span', 'Sandbox - Bosch » Campaigns'));
-     expect(boschCampaigns.count()).toBe(1);
-     boschCampaigns.click();
+    var boschCampaigns = element.all(by.cssContainingText('span', 'Sandbox - Bosch » Campaigns'));
+    expect(boschCampaigns.count()).toBe(1);
+    boschCampaigns.click();
 
-     //Not sure why this is giving back a count of 14 (Using the class below gives the correct count of 3)
-     var boschCreatePattern = element.all(by.cssContainingText('div', 'Create Custom Pattern'));
-     expect(boschCreatePattern.count()).toBe(14);
+    //Not sure why this is giving back a count of 14 (Using the class below gives the correct count of 3)
+    var boschCreatePattern = element.all(by.cssContainingText('div', 'Create Custom Pattern'));
+    expect(boschCreatePattern.count()).toBe(14);
 
-     //Use this to find the css class of title, which is the existing pattern names
-     var patternName = element.all(by.cssContainingText('.title', 'DateChange'));
-     expect(patternName.count()).toBe(1);
+    //Use this to find the css class of title, which is the existing pattern names
+    var patternName = element.all(by.cssContainingText('.title', 'DateChange'));
+    expect(patternName.count()).toBe(1);
 
-     //Use this to find the css class of title, which is the existing pattern names
-     var customPatternButtons = element.all(by.cssContainingText('.button', 'Create Custom Pattern'));
-     expect(customPatternButtons.count()).toBe(3);
+    //Use this to find the css class of title, which is the existing pattern names
+    var customPatternButtons = element.all(by.cssContainingText('.button', 'Create Custom Pattern'));
+    expect(customPatternButtons.count()).toBe(3);
 
-     var firstCreateCustomPatternButton = element.all(by.cssContainingText('.button', 'Create Custom Pattern')).first();
-     browser.driver.sleep(2000);
-     firstCreateCustomPatternButton.click();
+    var firstCreateCustomPatternButton = element.all(by.cssContainingText('.button', 'Create Custom Pattern')).first();
+    browser.driver.sleep(1000);
+    firstCreateCustomPatternButton.click();
 
-     browser.driver.sleep(3000);
-     browser.switchTo().frame('configure_pattern_frame');
-     var customizePatternPage = element.all(by.cssContainingText('h3', 'Customize a Pattern'));
-     expect(customizePatternPage.count()).toBe(1);
+    browser.driver.sleep(4000);
+    browser.switchTo().frame('configure_pattern_frame');
+    var customizePatternPage = element.all(by.cssContainingText('h3', 'Customize a Pattern'));
+    expect(customizePatternPage.count()).toBe(1);
 
-     element(by.css('.add-custom-elements-button')).click();
-     browser.driver.sleep(2000);
+    element(by.css('.add-custom-elements-button')).click();
+    browser.driver.sleep(1000);
 
-     element(by.cssContainingText('li', 'Constant')).click();
-     browser.driver.sleep(1000);
+    element(by.cssContainingText('li', 'Constant')).click();
+    browser.driver.sleep(1000);
 
-     element(by.name('label')).sendKeys('RR_');
-     browser.driver.sleep(1000);
+    element(by.name('label')).sendKeys('RR_');
+    browser.driver.sleep(1000);
 
-     element(by.css('.success')).click();
-     browser.driver.sleep(2000);
+    element(by.css('.success')).click();
+    browser.driver.sleep(1000);
 
-     element(by.name('pattern-name')).sendKeys('testName1');
-     browser.driver.sleep(2000);
+    element(by.name('pattern-name')).sendKeys('testName1');
+    browser.driver.sleep(1000);
+
+    element(by.css('div.pattern-name-control-buttons > .button')).click();
+    browser.driver.sleep(7000);
+
+    expect(element(by.cssContainingText('h2', 'Complete the Codes and Commit to Database')));
+    //element(by.css('.handsontableInput')).sendKeys('HolyMoly');
+    //element(by.css('.dataTable')).sendKeys('HolyMoly'); 
+
+    var classification_table = element(by.id('classification_table'));
+    expect(classification_table.isDisplayed()).toEqual(true);
+
+    browser.driver.sleep(1000);
+
+
+    var firstTd = element(by.id('classification_table')).element(by.css('.ht_master')).element(by.css('tbody')).element(by.css('td'));
+    var firstTd1 = element(by.id('classification_table')).element(by.css('.ht_master')).element(by.css('tbody')).element(by.css('td'));
+    firstTd1.click();
+    firstTd1.click();
+    firstTd1.sendKeys('BAM');
+
+    //var allTableDataElements = element.all(by.id('classification_table')).element(by.css('.ht_master')).element(by.css('tbody')).element(by.css('td')).get(0);
+    //let allTableDataElements = element(by.id('classification_table')).$$$$$$$('td');
+    //allTableDataElements.get(0).click();
+    browser.driver.sleep(4000);
+
+    //expect(allTableDataElements.count()).toBe(99);
+    //allTableDataElements.get(1).click();
+    //allTableDataElements.get(1).sendKeys('BAM!!!');
+    //expect(allTableDataElements.count()).toBe(88);
+
+    //element(by.css('.htAutocomplete')).sendKeys('HolyMoly');
 
     });
     
