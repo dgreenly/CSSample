@@ -68,11 +68,38 @@ describe('TrackingFirst QA Create Pattern', function() {
     browser.driver.sleep(1000);
 
 
-    var firstTd = element(by.id('classification_table')).element(by.css('.ht_master')).element(by.css('tbody')).element(by.css('td'));
-    var firstTd1 = element(by.id('classification_table')).element(by.css('.ht_master')).element(by.css('tbody')).element(by.css('td'));
-    firstTd1.click();
-    firstTd1.click();
-    firstTd1.sendKeys('BAM');
+    //This successfully puts me right on the "key" cell of the classification table
+    //The clicks do not wirk because I get a cannot focus errro which I think is because you cannot edit the key.
+    //var firstTd = element(by.id('classification_table')).element(by.css('.ht_master')).element(by.css('tbody')).element(by.css('td'));
+    //firstTd.click();
+    //firstTd.click();
+    //firstTd.sendKeys('BAM');
+
+    var tabledata = element.all(by.css(".ht_master"));
+    //Get Rows 
+    var rows =tabledata.all(by.tagName("tr"));
+    //Get cells values
+    var cells = rows.all(by.tagName("td"));
+
+    cells.get(1).click();
+    cells.get(1).click();
+    //cells.get(1).sendKeys('BAM');
+
+    //expect(cells.get(0).getText()).toEqual("something");
+    //expect(cells.get(1).getText()).toEqual("something");
+    //expect(cells.get(2).getText()).toEqual("something");
+
+/*
+    var items = element(by.id('classification_table')).element(by.css('.ht_master')).element(by.css('tbody')).element(by.css('td'));
+    var row = element.all(by.repeater('item in items.list')).first();
+    var cells = row.all(by.tagName('td'));
+
+    var cellTexts = cells.map(function (elm) {
+        return elm.getText();
+    });
+*/
+    //expect(cellTexts).toEqual(["The first text", "The second text", "The third text"]);
+
 
     //var allTableDataElements = element.all(by.id('classification_table')).element(by.css('.ht_master')).element(by.css('tbody')).element(by.css('td')).get(0);
     //let allTableDataElements = element(by.id('classification_table')).$$$$$$$('td');
