@@ -12,7 +12,7 @@ describe('TrackingFirst QA Create Pattern', function() {
 
     //Just some test code, this page has divs on it depending on how many reports
     var divsOnPage = element.all(by.css('div'));
-    expect(divsOnPage.count()).toBe(93);
+    //expect(divsOnPage.count()).toBe(93);
 
     //Verifying there is only one Campaigns Suite for Bosch Sandbox
     var boschCampaigns = element.all(by.cssContainingText('span', 'Sandbox - Bosch » Campaigns'));
@@ -46,13 +46,13 @@ describe('TrackingFirst QA Create Pattern', function() {
     element(by.cssContainingText('li', 'Constant')).click();
     browser.driver.sleep(1000);
 
-    element(by.name('label')).sendKeys('RR_');
+    element(by.name('label')).sendKeys('Auto_Test');
     browser.driver.sleep(1000);
 
     element(by.css('.success')).click();
     browser.driver.sleep(1000);
 
-    element(by.name('pattern-name')).sendKeys('testName1');
+    element(by.name('pattern-name')).sendKeys('_TestName2');
     browser.driver.sleep(1000);
 
     element(by.css('div.pattern-name-control-buttons > .button')).click();
@@ -67,23 +67,53 @@ describe('TrackingFirst QA Create Pattern', function() {
 
     browser.driver.sleep(1000);
 
-
-    //This successfully puts me right on the "key" cell of the classification table
-    //The clicks do not wirk because I get a cannot focus errro which I think is because you cannot edit the key.
-    //var firstTd = element(by.id('classification_table')).element(by.css('.ht_master')).element(by.css('tbody')).element(by.css('td'));
-    //firstTd.click();
-    //firstTd.click();
-    //firstTd.sendKeys('BAM');
-
+    //Get the classification table and navigate to the cells which are html td tags
     var tabledata = element.all(by.css(".ht_master"));
-    //Get Rows 
     var rows =tabledata.all(by.tagName("tr"));
-    //Get cells values
     var cells = rows.all(by.tagName("td"));
 
-    cells.get(1).click();
-    cells.get(1).click();
-    browser.driver.sleep(1000);
+    //cells.get(1).click();
+    //cells.get(1).click();
+    //browser.driver.sleep(1000);
+
+    //var count = 0;
+    //var dataToBeEntered = 'BAM';
+
+/*
+    for (var i = 0; i <= cells.length; i++) {
+        
+        console.log(i);
+        var cell = cells.get(i);
+
+        browser.driver.sleep(1000);
+        console.log(dataToBeEntered);
+
+        browser.actions().
+            mouseDown(cells.get(i)).
+            sendKeys(dataToBeEntered).
+            mouseUp().
+            perform();
+}*/
+
+/*
+    rows.all(by.tagName("td")).then(function(items){
+
+        count++;
+        dataToBeEntered += count;
+
+        browser.driver.sleep(1000);
+
+        console.log(count);
+        console.log(dataToBeEntered);
+
+        browser.actions().
+            mouseDown(items[count]).
+            sendKeys(dataToBeEntered).
+            //mouseUp().
+            perform();
+
+    });
+    */
 
     browser.actions().
     mouseDown(cells.get(1)).
@@ -93,24 +123,82 @@ describe('TrackingFirst QA Create Pattern', function() {
 
     browser.actions().
     mouseDown(cells.get(2)).
+    sendKeys("BAM2").
     mouseUp().
     perform();
+
+    browser.actions().
+    mouseDown(cells.get(3)).
+    sendKeys("BAM3").
+    mouseUp().
+    perform();
+
+    browser.actions().
+    mouseDown(cells.get(4)).
+    sendKeys("BAM4").
+    mouseUp().
+    perform();
+
+    browser.actions().
+    mouseDown(cells.get(5)).
+    sendKeys("").
+    mouseUp().
+    perform();
+
+     browser.actions().
+    mouseDown(cells.get(6)).
+    sendKeys("BAM6").
+    mouseUp().
+    perform();
+
+     browser.actions().
+    mouseDown(cells.get(7)).
+    sendKeys("BAM7").
+    mouseUp().
+    perform();
+
+     browser.actions().
+    mouseDown(cells.get(8)).
+    sendKeys("BAM8").
+    mouseUp().
+    perform();
+
+     browser.actions().
+    mouseDown(cells.get(9)).
+    sendKeys("BAM9").
+    mouseUp().
+    perform();
+    
 
     //This drags the selection from the first cell in the classification table to the 3rd.
     //This code WORKS
+    //browser.actions().
+    //mouseDown(cells.get(1)).
+    //mouseMove(cells.get(3)).
+    //mouseUp().
+    //perform();
+
+    cells.get(1).click();
+
     browser.actions().
-    mouseDown(cells.get(1)).
-    mouseMove(cells.get(3)).
-    mouseUp().
+    dragAndDrop(cells.get(1), cells.get(5)).
     perform();
 
-   cells.get(1).click();
+    element.all(by.cssContainingText('span', 'Submit')).click();
+    //browser.driver.sleep(1000);
 
-    //browser.actions = new Actions(driver);
-    //browser.actions.moveToElement(cells.get(1));
-    //browser.actions.click();
-    //browser.actions.sendKeys("Some Name");
-   // browser.actions.build().perform();
+    browser.wait(function() {
+            return element((by.cssContainingText('.popover .yes', 'Yes'))).isDisplayed();
+        }, 1000);
+
+    element(by.cssContainingText('.popover .yes', 'Yes')).click();
+
+     browser.wait(function() {
+            return element((by.id('success-modal'))).isDisplayed();
+        }, 1000);
+
+    expect(element((by.id('success-modal'))).isDisplayed());
+
 
     //expect(cells.get(0).getText()).toEqual("something");
     //expect(cells.get(1).getText()).toEqual("something");
